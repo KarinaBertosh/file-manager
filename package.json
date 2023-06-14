@@ -4,6 +4,8 @@
   "description": "file-manager",
   "type": "module",
   "scripts": {
+    "start": "node ./src/index.js",
+    "start:named": "npm run start -- --username=testUser"
   },
   "repository": {
     "type": "git",
@@ -11,7 +13,8 @@
   },
   "keywords": [
     "nodejs",
-    "assignments"
+    "assignments",
+    "karynabertash"
   ],
   "author": "karynabertash",
   "license": "ISC",
