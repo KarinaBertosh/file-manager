@@ -1,0 +1,22 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "file-manager",
+  "type": "module",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KarinaBertosh/file-manager.git"
+  },
+  "keywords": [
+    "nodejs",
+    "assignments"
+  ],
+  "author": "karynabertash",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KarinaBertosh/file-manager/issues"
+  },
+  "homepage": "https://github.com/KarinaBertosh/file-manager#readme"
+}
