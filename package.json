@@ -2,7 +2,7 @@
   "name": "file-manager",
   "version": "1.0.0",
   "description": "file-manager",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "node ./src/index.js",
     "start:named": "npm run start -- --username=testUser"

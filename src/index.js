@@ -1,17 +1,33 @@
-import readline from "readline";
-import process from "process";
+const readline = require("readline");
+const process = require("process");
+const {up, cd} = require("./operations/nwd");
 
 const userName = process.argv[process.argv.length - 1].toString().slice(11);
-console.log(`Welcome to the File Manager, ${userName}!`);
+const currentDirectory = process.cwd();
+var showCurrentDirectory = (path) =>
+  console.log(`You are currently in ${path}`);
+
+const greeting = () => {
+  console.log(`Welcome to the File Manager, ${userName}!`);
+  showCurrentDirectory(currentDirectory);
+};
+
+greeting();
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-rl.on("line", (line) => {
-  if (line === ".exit") {
+rl.on("line", (command) => {
+  if (command === ".exit") {
     process.exit();
+  }
+  if (command === "up") {
+    showCurrentDirectory(up(currentDirectory));
+  }
+  if (command.substr(0, 2) === "cd") {
+    cd(command.slice(3));
   }
 });
 
