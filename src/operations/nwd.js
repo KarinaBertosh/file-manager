@@ -1,28 +1,27 @@
-const path = require("path");
-const fs = require("fs");
+import { dirname, isAbsolute, resolve } from "path";
+import fs from "fs";
 
-function up(path) {
-  return path.dirname(path);
+export function up(path) {
+  const result = dirname(path);
+  return result;
 }
 
-const fileExists = (command) => {
-  fs.stat(command, (error, stats) => {
+const fileExists = (path) => {
+  fs.stat(path, (error, stats) => {
     if (error) {
-      console.log(`No such file or directory: ${command}`);
+      console.log(`No such file or directory: ${path}`);
     } else {
-      console.log(`You are currently in ${command}`);
+      console.log(`You are currently in ${path}`);
+      return path;
     }
   });
 };
 
-function cd(command) {
-  if (path.isAbsolute(command)) {
+export function cd(command, currentDir) {
+  if (isAbsolute(command)) {
     fileExists(command);
   } else {
-    const dirname = path.dirname(path.resolve(__dirname));
-    const currentPath = path.resolve(dirname, command);
+    const currentPath = resolve(currentDir, command);
     fileExists(currentPath);
   }
 }
-
-module.exports = { up, cd };
