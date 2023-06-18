@@ -6,10 +6,6 @@ export class App {
     this.currentDir = initDir;
   }
 
-  showCurrentDirectory() {
-    console.log(`You are currently in ${this.currentDir}`);
-  }
-
   async start() {
     this.showCurrentDirectory();
 
@@ -18,19 +14,28 @@ export class App {
       output: process.stdout,
     });
 
-    rl.on("line", (command) => {
+    rl.on("line", async (command) => {
       if (command === ".exit") {
         process.exit();
       }
+
       if (command === "up") {
-        console.log("up", up(this.currentDir));
         this.currentDir = up(this.currentDir);
-        this.showCurrentDirectory();
       }
+
       if (command.substr(0, 2) === "cd") {
-        cd(command.slice(3), this.currentDir);
-        // this.currentDir = cd(command.slice(3), this.currentDir);
+        const path = command.slice(3);
+        const result = await cd(path, this.currentDir);
+        if (result !== undefined) {
+          this.currentDir = result;
+        }
       }
+      
+      this.showCurrentDirectory();
     });
+  }
+
+  showCurrentDirectory() {
+    console.log(`You are currently in ${this.currentDir}`);
   }
 }

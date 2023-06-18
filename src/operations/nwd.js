@@ -6,22 +6,19 @@ export function up(path) {
   return result;
 }
 
-const fileExists = (path) => {
-  fs.stat(path, (error, stats) => {
-    if (error) {
-      console.log(`No such file or directory: ${path}`);
-    } else {
-      console.log(`You are currently in ${path}`);
-      return path;
-    }
-  });
-};
-
 export function cd(command, currentDir) {
+  let path;
   if (isAbsolute(command)) {
-    fileExists(command);
+    path = command;
   } else {
     const currentPath = resolve(currentDir, command);
-    fileExists(currentPath);
+    path = currentPath;
+  }
+  try {
+    if (fs.existsSync(path)) {
+      return `${path}`;
+    }
+  } catch (err) {
+    return "error";
   }
 }
