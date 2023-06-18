@@ -4,6 +4,7 @@ import { cd, up } from "./operations/nwd.js";
 export class App {
   constructor(initDir) {
     this.currentDir = initDir;
+    this.rootDit = initDir;
   }
 
   async start() {
@@ -20,7 +21,7 @@ export class App {
       }
 
       if (command === "up") {
-        this.currentDir = up(this.currentDir);
+        this.currentDir = up(this.currentDir, this.rootDit);
       }
 
       if (command.substr(0, 2) === "cd") {
@@ -30,7 +31,7 @@ export class App {
           this.currentDir = result;
         }
       }
-      
+
       this.showCurrentDirectory();
     });
   }

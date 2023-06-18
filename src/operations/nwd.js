@@ -1,9 +1,13 @@
 import { dirname, isAbsolute, resolve } from "path";
 import fs from "fs";
 
-export function up(path) {
-  const result = dirname(path);
-  return result;
+export function up(path, rootDit) {
+  if (path === rootDit) {
+    return path;
+  } else {
+    const result = dirname(path);
+    return result;
+  }
 }
 
 export function cd(command, currentDir) {
