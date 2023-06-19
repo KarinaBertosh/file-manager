@@ -1,6 +1,6 @@
 import readline from "readline";
 import { cd, ls, up } from "./operations/nwd.js";
-import { add, cat, rn } from "./operations/file.js";
+import { add, cat, cp, rn } from "./operations/file.js";
 
 export class App {
   constructor(initDir) {
@@ -48,6 +48,11 @@ export class App {
       if (command.substr(0, 2) === "rn") {
         const arrCommand = command.split(" ");
         rn(arrCommand[1], this.currentDir, arrCommand[2]);
+      }
+
+      if (command.substr(0, 2) === "cp") {
+        const arrCommand = command.split(" ");
+        cp(arrCommand[1], this.currentDir, arrCommand[2]);
       }
 
       this.showCurrentDirectory();

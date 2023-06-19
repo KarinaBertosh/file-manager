@@ -46,3 +46,26 @@ export function rn(path, currentDir, newFile) {
     return console.log("File not rename");
   }
 }
+
+export async function cp(path, currentDir, newFile) {
+  checkFileExist(path, currentDir);
+  if (newFile.includes(".txt")) {
+    let reader = new fs.createReadStream(file, "utf-8");
+    let writer = fs.createWriteStream(newFile);
+
+    reader.on("data", function (chunk) {
+      writer.write(chunk);
+      console.log("Completed successfully");
+    });
+
+    const checkErrorsReader = new Promise((resolve, reject) => {
+      reader.on("end", () => resolve());
+      reader.on("error", () => console.log("File not read"));
+      writer.on("end", () => resolve());
+      writer.on("error", () => console.log("File not created"));
+    });
+    await checkErrorsReader;
+  } else {
+    console.log(`The new file must include ".txt"`);
+  }
+}
