@@ -3,6 +3,7 @@ import { cd, ls, up } from "./operations/nwd.js";
 import { add, cat, cp, mv, rm, rn } from "./operations/file.js";
 import { arh, cpus, eol, getName, homedir } from "./operations/os.js";
 import { hash } from "./operations/hash.js";
+import { compress, decompress } from "./operations/compress.js";
 
 export class App {
   constructor(initDir) {
@@ -90,6 +91,16 @@ export class App {
       if (command.substr(0, 4) === "hash") {
         const arrCommand = command.split(" ");
         hash(arrCommand[1], this.currentDir);
+      }
+
+      if (command.substr(0, 8) === "compress") {
+        const arrCommand = command.split(" ");
+        compress(arrCommand[1], this.currentDir, arrCommand[2]);
+      }
+
+      if (command.substr(0, 10) === "decompress") {
+        const arrCommand = command.split(" ");
+        decompress(arrCommand[1], this.currentDir, arrCommand[2]);
       }
 
       this.showCurrentDirectory();
