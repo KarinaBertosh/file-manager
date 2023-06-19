@@ -1,5 +1,5 @@
 import readline from "readline";
-import { cd, up } from "./operations/nwd.js";
+import { cd, ls, up } from "./operations/nwd.js";
 
 export class App {
   constructor(initDir) {
@@ -26,10 +26,14 @@ export class App {
 
       if (command.substr(0, 2) === "cd") {
         const path = command.slice(3);
-        const result = await cd(path, this.currentDir);
+        const result = cd(path, this.currentDir);
         if (result !== undefined) {
           this.currentDir = result;
         }
+      }
+
+      if (command === "ls") {
+        ls(this.currentDir);
       }
 
       this.showCurrentDirectory();
