@@ -1,7 +1,7 @@
 import readline from "readline";
 import { cd, ls, up } from "./operations/nwd.js";
 import { add, cat, cp, mv, rm, rn } from "./operations/file.js";
-import fs from "fs";
+import { arh, cpus, eol, getName, homedir } from "./operations/os.js";
 
 export class App {
   constructor(initDir) {
@@ -64,6 +64,26 @@ export class App {
       if (command.substr(0, 2) === "rm") {
         const arrCommand = command.split(" ");
         rm(arrCommand[1], this.currentDir);
+      }
+
+      if (command.substr(0, 8) === "os --EOL") {
+        eol()
+      }
+
+      if (command.substr(0, 9) === "os --cpus") {
+        cpus()
+      }
+
+      if (command.substr(0, 17) === "os --architecture") {
+        arh()
+      }
+
+      if (command.substr(0, 12) === "os --homedir") {
+        homedir()
+      }
+
+      if (command.substr(0, 13) === "os --username") {
+        getName()
       }
 
       this.showCurrentDirectory();
