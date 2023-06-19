@@ -81,3 +81,14 @@ export async function mv(path, currentDir, newFile) {
   const unlink = true;
   cp(path, currentDir, newFile, unlink);
 }
+
+export async function rm(path, currentDir) {
+  checkFileExist(path, currentDir);
+
+  try {
+    fs.unlinkSync(file);
+    console.log("File deleted");
+  } catch (error) {
+    console.log("No such file exists");
+  }
+}

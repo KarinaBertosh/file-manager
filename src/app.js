@@ -1,6 +1,6 @@
 import readline from "readline";
 import { cd, ls, up } from "./operations/nwd.js";
-import { add, cat, cp, mv, rn } from "./operations/file.js";
+import { add, cat, cp, mv, rm, rn } from "./operations/file.js";
 import fs from "fs";
 
 export class App {
@@ -59,6 +59,11 @@ export class App {
       if (command.substr(0, 2) === "mv") {
         const arrCommand = command.split(" ");
         mv(arrCommand[1], this.currentDir, arrCommand[2]);
+      }
+
+      if (command.substr(0, 2) === "rm") {
+        const arrCommand = command.split(" ");
+        rm(arrCommand[1], this.currentDir);
       }
 
       this.showCurrentDirectory();
