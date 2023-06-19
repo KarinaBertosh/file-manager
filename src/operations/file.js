@@ -47,7 +47,7 @@ export function rn(path, currentDir, newFile) {
   }
 }
 
-export async function cp(path, currentDir, newFile) {
+export async function cp(path, currentDir, newFile, unlink) {
   checkFileExist(path, currentDir);
   if (newFile.includes(".txt")) {
     let reader = new fs.createReadStream(file, "utf-8");
@@ -65,7 +65,19 @@ export async function cp(path, currentDir, newFile) {
       writer.on("error", () => console.log("File not created"));
     });
     await checkErrorsReader;
+    if (unlink) {
+      try {
+        fs.unlinkSync(file);
+      } catch (error) {
+        console.log("err");
+      }
+    }
   } else {
     console.log(`The new file must include ".txt"`);
   }
+}
+
+export async function mv(path, currentDir, newFile) {
+  const unlink = true;
+  cp(path, currentDir, newFile, unlink);
 }
