@@ -2,6 +2,7 @@ import readline from "readline";
 import { cd, ls, up } from "./operations/nwd.js";
 import { add, cat, cp, mv, rm, rn } from "./operations/file.js";
 import { arh, cpus, eol, getName, homedir } from "./operations/os.js";
+import { hash } from "./operations/hash.js";
 
 export class App {
   constructor(initDir) {
@@ -67,23 +68,28 @@ export class App {
       }
 
       if (command.substr(0, 8) === "os --EOL") {
-        eol()
+        eol();
       }
 
       if (command.substr(0, 9) === "os --cpus") {
-        cpus()
+        cpus();
       }
 
       if (command.substr(0, 17) === "os --architecture") {
-        arh()
+        arh();
       }
 
       if (command.substr(0, 12) === "os --homedir") {
-        homedir()
+        homedir();
       }
 
       if (command.substr(0, 13) === "os --username") {
-        getName()
+        getName();
+      }
+
+      if (command.substr(0, 4) === "hash") {
+        const arrCommand = command.split(" ");
+        hash(arrCommand[1], this.currentDir);
       }
 
       this.showCurrentDirectory();
