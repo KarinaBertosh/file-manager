@@ -1,5 +1,6 @@
 import readline from "readline";
 import { cd, ls, up } from "./operations/nwd.js";
+import { cat } from "./operations/file.js";
 
 export class App {
   constructor(initDir) {
@@ -34,6 +35,10 @@ export class App {
 
       if (command === "ls") {
         ls(this.currentDir);
+      }
+
+      if (command.substr(0, 3) === "cat") {
+        cat(command.slice(4), this.currentDir);
       }
 
       this.showCurrentDirectory();
