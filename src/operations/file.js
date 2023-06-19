@@ -19,7 +19,7 @@ export async function cat(path, currentDir) {
   reader.pipe(process.stdout);
   const checkErrors = new Promise((resolve, reject) => {
     reader.on("end", () => resolve());
-    reader.on("error", () => console.log("File not found"));
+    reader.on("error", () => console.log("File not read"));
   });
   await checkErrors;
 }
@@ -32,4 +32,17 @@ export async function add(path, currentDir) {
     writer.on("error", () => console.log("File not created"));
   });
   await checkErrors;
+}
+
+export function rn(path, currentDir, newFile) {
+  checkFileExist(path, currentDir);
+
+  if (fs.existsSync(file) && !fs.existsSync(newFile)) {
+    fs.rename(file, newFile, () => {
+      console.log("File Renamed!");
+    });
+  } else {
+    const err = new Error("FS operation failed");
+    return console.log("File not rename");
+  }
 }
