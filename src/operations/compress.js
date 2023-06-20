@@ -1,6 +1,6 @@
-import { createReadStream, createWriteStream } from "fs";
 import { isAbsolute, resolve } from "path";
-import { createGzip } from "zlib";
+import { createBrotliCompress, createBrotliDecompress, createGzip } from "zlib";
+import fs from "fs";
 
 let file;
 
@@ -16,15 +16,11 @@ const checkFileExist = (path, currentDir) => {
 export function compress(path, currentDir, newFile) {
   checkFileExist(path, currentDir);
 
-  try {
-    const handleStream = createReadStream(file);
-    handleStream
-      .pipe(createGzip())
-      .pipe(createWriteStream(newFile))
-      .on("finish", () => {
-        console.log("Compression completed successfully");
-      });
-  } catch (err) {
+  if (fs.existsSync(file)) {
+    const readStream = fs.createReadStream(file);
+    const writeStream = fs.createWriteStream(newFile);
+    readStream.pipe(createBrotliCompress()).pipe(writeStream);
+  } else {
     console.log("No such file exists");
   }
 }
@@ -32,16 +28,11 @@ export function compress(path, currentDir, newFile) {
 export function decompress(path, currentDir, newFile) {
   checkFileExist(path, currentDir);
 
-  try {
-    const unzip = zlib.createUnzip();
-    const input = fs.createReadStream(file);
-    const output = fs.createWriteStream(newFile, {
-      encoding: "binary",
-    });
-    pipeline(input, unzip, output, (error) => {
-      if (error) console.log(error);
-    });
-  } catch (err) {
+  if (fs.existsSync(file)) {
+    const readStream = fs.createReadStream(file);
+    const writeStream = fs.createWriteStream(newFile, { encoding: "binary" });
+    readStream.pipe(createBrotliDecompress()).pipe(writeStream);
+  } else {
     console.log("No such file exists");
   }
 }
