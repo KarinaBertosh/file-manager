@@ -20,87 +20,84 @@ export class App {
     });
 
     rl.on("line", async (command) => {
-      if (command === ".exit") {
+      const arrCommand = command.split(" ");
+      const nameCommand = arrCommand[0];
+      const argOne = arrCommand[1];
+      const argTwo = arrCommand[2];
+
+      if (nameCommand === ".exit") {
         process.exit();
       }
 
-      if (command === "up") {
+      if (nameCommand === "up") {
         this.currentDir = up(this.currentDir, this.rootDit);
       }
 
-      if (command.substr(0, 2) === "cd") {
-        const path = command.slice(3);
-        const result = cd(path, this.currentDir);
+      if (nameCommand === "cd") {
+        const result = cd(argOne, this.currentDir);
         if (result !== undefined) {
           this.currentDir = result;
         }
       }
 
-      if (command === "ls") {
+      if (nameCommand === "ls") {
         ls(this.currentDir);
       }
 
-      if (command.substr(0, 3) === "cat") {
-        cat(command.slice(4), this.currentDir);
+      if (nameCommand === "cat") {
+        cat(argOne, this.currentDir);
       }
 
-      if (command.substr(0, 3) === "add") {
-        add(command.slice(4), this.currentDir);
+      if (nameCommand === "add") {
+        add(argOne, this.currentDir);
       }
 
-      if (command.substr(0, 2) === "rn") {
-        const arrCommand = command.split(" ");
-        rn(arrCommand[1], this.currentDir, arrCommand[2]);
+      if (nameCommand === "rn") {
+        rn(argOne, this.currentDir, argTwo);
       }
 
-      if (command.substr(0, 2) === "cp") {
-        const arrCommand = command.split(" ");
-        cp(arrCommand[1], this.currentDir, arrCommand[2]);
+      if (nameCommand === "cp") {
+        cp(argOne, this.currentDir, argTwo);
       }
 
-      if (command.substr(0, 2) === "mv") {
-        const arrCommand = command.split(" ");
-        mv(arrCommand[1], this.currentDir, arrCommand[2]);
+      if (nameCommand === "mv") {
+        mv(argOne, this.currentDir, argTwo);
       }
 
-      if (command.substr(0, 2) === "rm") {
-        const arrCommand = command.split(" ");
-        rm(arrCommand[1], this.currentDir);
+      if (nameCommand === "rm") {
+        rm(argOne, this.currentDir);
       }
 
-      if (command.substr(0, 8) === "os --EOL") {
+      if (nameCommand === "os" && argOne === "--EOL") {
         eol();
       }
 
-      if (command.substr(0, 9) === "os --cpus") {
+      if (nameCommand === "os" && argOne === "--cpus") {
         cpus();
       }
 
-      if (command.substr(0, 17) === "os --architecture") {
+      if (nameCommand === "os" && argOne === "--architecture") {
         arh();
       }
 
-      if (command.substr(0, 12) === "os --homedir") {
+      if (nameCommand === "os" && argOne === "--homedir") {
         homedir();
       }
 
-      if (command.substr(0, 13) === "os --username") {
+      if (nameCommand === "os" && argOne === "--username") {
         getName();
       }
 
-      if (command.substr(0, 4) === "hash") {
-        const arrCommand = command.split(" ");
-        hash(arrCommand[1], this.currentDir);
+      if (nameCommand === "hash") {
+        hash(argOne, this.currentDir);
       }
 
-      if (command.substr(0, 8) === "compress") {
-        const arrCommand = command.split(" ");
-        compress(arrCommand[1], this.currentDir, arrCommand[2]);
+      if (nameCommand === "compress") {
+        compress(argOne, this.currentDir, argTwo);
       }
 
-      if (command.substr(0, 10) === "decompress") {
-        const arrCommand = command.split(" ");
-        decompress(arrCommand[1], this.currentDir, arrCommand[2]);
+      if (nameCommand === "decompress") {
+        decompress(argOne, this.currentDir, argTwo);
       }
 
       this.showCurrentDirectory();
