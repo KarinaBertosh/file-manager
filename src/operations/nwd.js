@@ -1,16 +1,6 @@
-import { dirname, isAbsolute, resolve } from "path";
+import { dirname } from "path";
 import fs from "fs";
-
-let file;
-
-const checkFileExist = (path, currentDir) => {
-  if (isAbsolute(path)) {
-    file = path;
-  } else {
-    const currentPath = resolve(currentDir, path);
-    file = currentPath;
-  }
-};
+import { checkFileExist, file } from "./general.js";
 
 export function up(path, currentDir) {
   if (path === currentDir) {

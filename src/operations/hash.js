@@ -1,17 +1,7 @@
 import crypto from "crypto";
 import fs from "fs";
-import { isAbsolute, resolve } from "path";
+import { checkFileExist, file } from "./general.js";
 
-let file;
-
-const checkFileExist = (path, currentDir) => {
-  if (isAbsolute(path)) {
-    file = path;
-  } else {
-    const currentPath = resolve(currentDir, path);
-    file = currentPath;
-  }
-};
 
 export function hash(path, currentDir) {
   checkFileExist(path, currentDir);
@@ -28,6 +18,6 @@ export function hash(path, currentDir) {
 
     hashNode(text).then(console.log);
   } catch (err) {
-    return console.log("No such file exists");
+    console.log("Error: No such file exists");
   }
 }
