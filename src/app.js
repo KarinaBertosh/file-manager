@@ -1,9 +1,10 @@
 import readline from "readline";
-import { cd, ls, up } from "./operations/nwd.js";
+import { cd, up } from "./operations/nwd.js";
 import { add, cat, cp, mv, rm, rn } from "./operations/file.js";
 import { arh, cpus, eol, getName, homedir } from "./operations/os.js";
 import { hash } from "./operations/hash.js";
 import { compress, decompress } from "./operations/compress.js";
+import { ls } from "./operations/list.js";
 
 export class App {
   constructor(initDir) {

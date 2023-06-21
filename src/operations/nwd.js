@@ -19,32 +19,4 @@ export function cd(path, currentDir) {
   } else console.log("Error: No such file exists");
 }
 
-export async function ls(currentDir) {
-  let dirArr = [];
-  let fileArr = [];
 
-  if (fs.existsSync(currentDir)) {
-    fs.readdir(currentDir, (err, files) => {
-      if (err)
-        console.log("Error: No such directory exists, or you are in a file");
-      else {
-        files.forEach((f) => {
-          fs.lstat(f, function (err, stats) {
-            if (stats.isFile()) {
-              fileArr.push(`${f}: file`);
-            } else {
-              dirArr.push(`${f}: directory`);
-            }
-            if (files[files.length - 1] === f) {
-              dirArr.sort();
-              fileArr.sort();
-              console.log(dirArr.concat(fileArr));
-            }
-          });
-        });
-      }
-    });
-  } else {
-    console.log("0, Error: No such directory exists, or you are in a file");
-  }
-}
