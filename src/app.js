@@ -25,80 +25,51 @@ export class App {
       const nameCommand = arrCommand[0];
       const argOne = arrCommand[1];
       const argTwo = arrCommand[2];
+      const argThree = arrCommand[3];
 
-      if (nameCommand === ".exit") {
+      if (nameCommand === ".exit" && !argOne) {
         process.exit();
-      }
-
-      if (nameCommand === "up") {
+      } else if (nameCommand === "up" && !argOne) {
         this.currentDir = up(this.currentDir, this.rootDit);
-      }
-
-      if (nameCommand === "cd") {
+      } else if (nameCommand === "cd" && argOne && !argTwo) {
         const result = cd(argOne, this.currentDir);
         if (result !== undefined) {
           this.currentDir = result;
         }
-      }
-
-      if (nameCommand === "ls") {
+      } else if (nameCommand === "ls" && !argOne) {
         ls(this.currentDir);
-      }
-
-      if (nameCommand === "cat") {
+      } else if (nameCommand === "cat" && argOne && !argTwo) {
         cat(argOne, this.currentDir);
-      }
-
-      if (nameCommand === "add") {
+      } else if (nameCommand === "add" && argOne && !argTwo) {
         add(argOne, this.currentDir);
-      }
-
-      if (nameCommand === "rn") {
-        rn(argOne, this.currentDir, argTwo);
-      }
-
-      if (nameCommand === "cp") {
-        cp(argOne, this.currentDir, argTwo);
-      }
-
-      if (nameCommand === "mv") {
-        mv(argOne, this.currentDir, argTwo);
-      }
-
-      if (nameCommand === "rm") {
-        rm(argOne, this.currentDir);
-      }
-
-      if (nameCommand === "os" && argOne === "--EOL") {
+      } else if (nameCommand === "rn" && argOne && argTwo && !argThree) {
+        rn(argOne, this.currentDir, argTwo)
+      } else if (nameCommand === "cp" && argOne && argTwo && !argThree) {
+        cp(argOne, this.currentDir, argTwo)
+      } else if (nameCommand === "mv" && argOne && argTwo && !argThree) {
+        mv(argOne, this.currentDir, argTwo)
+      } else if (nameCommand === "rm" && argOne && !argTwo) {
+        rm(argOne, this.currentDir)
+      } else if (nameCommand === "os" && argOne === "--EOL" && !argTwo) {
         eol();
-      }
-
-      if (nameCommand === "os" && argOne === "--cpus") {
+      } else if (nameCommand === "os" && argOne === "--cpus" && !argTwo) {
         cpus();
-      }
-
-      if (nameCommand === "os" && argOne === "--architecture") {
+      } else if (
+        nameCommand === "os" &&
+        argOne === "--architecture" &&
+        !argTwo
+      ) {
         arh();
-      }
-
-      if (nameCommand === "os" && argOne === "--homedir") {
+      } else if (nameCommand === "os" && argOne === "--homedir" && !argTwo) {
         homedir();
-      }
-
-      if (nameCommand === "os" && argOne === "--username") {
+      } else if (nameCommand === "os" && argOne === "--username" && !argTwo) {
         getName();
-      }
-
-      if (nameCommand === "hash") {
-        hash(argOne, this.currentDir);
-      }
-
-      if (nameCommand === "compress") {
-        compress(argOne, this.currentDir, argTwo);
-      }
-
-      if (nameCommand === "decompress") {
-        decompress(argOne, this.currentDir, argTwo);
+      } else if (nameCommand === "hash" && argOne && !argTwo) {
+        hash(argOne, this.currentDir)
+      } else if (nameCommand === "compress" && argOne && argTwo && !argThree) {
+        compress(argOne, this.currentDir, argTwo)
+      } else if (nameCommand === "decompress" && argOne && argTwo && !argThree) {
+        decompress(argOne, this.currentDir, argTwo)
       }
 
       this.showCurrentDirectory();
