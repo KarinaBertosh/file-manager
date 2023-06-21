@@ -114,6 +114,7 @@ export async function mv(path, currentDir, newFile) {
 
 export async function rm(path, currentDir) {
   if (arguments) {
+    checkFileExist(path, currentDir);
     try {
       fs.unlinkSync(file);
       console.log("File deleted");
@@ -123,5 +124,4 @@ export async function rm(path, currentDir) {
   } else {
     console.log("Error: not received all arguments");
   }
-  checkFileExist(path, currentDir);
 }
