@@ -1,2 +1,2 @@
-Файл создан для тестирования
-команды "cat"
+File created for testing
+"cat" commands
