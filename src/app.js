@@ -23,65 +23,74 @@ export class App {
     rl.on("line", async (command) => {
       const arrCommand = command.split(" ");
       const nameCommand = arrCommand[0];
-      const argOne = arrCommand[1];
-      const argTwo = arrCommand[2];
-      const argThree = arrCommand[3];
+      const firstArg = arrCommand[1];
+      const secondArg = arrCommand[2];
 
       switch (true) {
-        case nameCommand === ".exit" && !argOne:
+        case nameCommand === ".exit" && arrCommand.length === 1:
           process.exit();
-        case nameCommand === "up" && !argOne:
+        case nameCommand === "up" && arrCommand.length === 1:
           this.currentDir = up(this.currentDir, this.rootDit);
           break;
-        case nameCommand === "cd" && argOne && !argTwo:
-          if (cd(argOne, this.currentDir) !== undefined) {
-            this.currentDir = cd(argOne, this.currentDir);
+        case nameCommand === "cd" && arrCommand.length === 2:
+          if (cd(firstArg, this.currentDir) !== undefined) {
+            this.currentDir = cd(firstArg, this.currentDir);
           }
           break;
-        case nameCommand === "ls" && !argOne:
+        case nameCommand === "ls" && arrCommand.length === 1:
           ls(this.currentDir);
           break;
-        case nameCommand === "cat" && argOne && !argTwo:
-          cat(argOne, this.currentDir);
+        case nameCommand === "cat" && arrCommand.length === 2:
+          cat(firstArg, this.currentDir);
           break;
-        case nameCommand === "add" && argOne && !argTwo:
-          add(argOne, this.currentDir);
+        case nameCommand === "add" && arrCommand.length === 2:
+          add(firstArg, this.currentDir);
           break;
-        case nameCommand === "rn" && argOne && argTwo && !argThree:
-          rn(argOne, this.currentDir, argTwo);
+        case nameCommand === "rn" && arrCommand.length === 3:
+          rn(firstArg, this.currentDir, secondArg);
           break;
-        case nameCommand === "cp" && argOne && argTwo && !argThree:
-          cp(argOne, this.currentDir, argTwo);
+        case nameCommand === "cp" && arrCommand.length === 3:
+          cp(firstArg, this.currentDir, secondArg);
           break;
-        case nameCommand === "mv" && argOne && argTwo && !argThree:
-          mv(argOne, this.currentDir, argTwo);
+        case nameCommand === "mv" && arrCommand.length === 3:
+          mv(firstArg, this.currentDir, secondArg);
           break;
-        case nameCommand === "rm" && argOne && !argTwo:
-          rm(argOne, this.currentDir);
+        case nameCommand === "rm" && arrCommand.length === 2:
+          rm(firstArg, this.currentDir);
           break;
-        case nameCommand === "os" && argOne === "--EOL" && !argTwo:
+        case nameCommand === "os" &&
+          firstArg === "--EOL" &&
+          arrCommand.length === 2:
           eol();
           break;
-        case nameCommand === "os" && argOne === "--cpus" && !argTwo:
+        case nameCommand === "os" &&
+          firstArg === "--cpus" &&
+          arrCommand.length === 2:
           cpus();
           break;
-        case nameCommand === "os" && argOne === "--architecture" && !argTwo:
+        case nameCommand === "os" &&
+          firstArg === "--architecture" &&
+          arrCommand.length === 2:
           arh();
           break;
-        case nameCommand === "os" && argOne === "--homedir" && !argTwo:
+        case nameCommand === "os" &&
+          firstArg === "--homedir" &&
+          arrCommand.length === 2:
           homedir();
           break;
-        case nameCommand === "os" && argOne === "--username" && !argTwo:
+        case nameCommand === "os" &&
+          firstArg === "--username" &&
+          arrCommand.length === 2:
           getName();
           break;
-        case nameCommand === "hash" && argOne && !argTwo:
-          hash(argOne, this.currentDir);
+        case nameCommand === "hash" && arrCommand.length === 2:
+          hash(firstArg, this.currentDir);
           break;
-        case nameCommand === "compress" && argOne && argTwo && !argThree:
-          compress(argOne, this.currentDir, argTwo);
+        case nameCommand === "compress" && arrCommand.length === 3:
+          compress(firstArg, this.currentDir, secondArg);
           break;
-        case nameCommand === "decompress" && argOne && argTwo && !argThree:
-          decompress(argOne, this.currentDir, argTwo);
+        case nameCommand === "decompress" && arrCommand.length === 3:
+          decompress(firstArg, this.currentDir, secondArg);
           break;
       }
 
