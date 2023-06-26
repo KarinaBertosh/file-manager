@@ -92,6 +92,8 @@ export class App {
         case nameCommand === "decompress" && arrCommand.length === 3:
           decompress(firstArg, this.currentDir, secondArg);
           break;
+        default:
+          console.log("Error: no such command exists");
       }
 
       this.showCurrentDirectory();
