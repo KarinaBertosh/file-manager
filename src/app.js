@@ -27,49 +27,62 @@ export class App {
       const argTwo = arrCommand[2];
       const argThree = arrCommand[3];
 
-      if (nameCommand === ".exit" && !argOne) {
-        process.exit();
-      } else if (nameCommand === "up" && !argOne) {
-        this.currentDir = up(this.currentDir, this.rootDit);
-      } else if (nameCommand === "cd" && argOne && !argTwo) {
-        const result = cd(argOne, this.currentDir);
-        if (result !== undefined) {
-          this.currentDir = result;
-        }
-      } else if (nameCommand === "ls" && !argOne) {
-        ls(this.currentDir);
-      } else if (nameCommand === "cat" && argOne && !argTwo) {
-        cat(argOne, this.currentDir);
-      } else if (nameCommand === "add" && argOne && !argTwo) {
-        add(argOne, this.currentDir);
-      } else if (nameCommand === "rn" && argOne && argTwo && !argThree) {
-        rn(argOne, this.currentDir, argTwo)
-      } else if (nameCommand === "cp" && argOne && argTwo && !argThree) {
-        cp(argOne, this.currentDir, argTwo)
-      } else if (nameCommand === "mv" && argOne && argTwo && !argThree) {
-        mv(argOne, this.currentDir, argTwo)
-      } else if (nameCommand === "rm" && argOne && !argTwo) {
-        rm(argOne, this.currentDir)
-      } else if (nameCommand === "os" && argOne === "--EOL" && !argTwo) {
-        eol();
-      } else if (nameCommand === "os" && argOne === "--cpus" && !argTwo) {
-        cpus();
-      } else if (
-        nameCommand === "os" &&
-        argOne === "--architecture" &&
-        !argTwo
-      ) {
-        arh();
-      } else if (nameCommand === "os" && argOne === "--homedir" && !argTwo) {
-        homedir();
-      } else if (nameCommand === "os" && argOne === "--username" && !argTwo) {
-        getName();
-      } else if (nameCommand === "hash" && argOne && !argTwo) {
-        hash(argOne, this.currentDir)
-      } else if (nameCommand === "compress" && argOne && argTwo && !argThree) {
-        compress(argOne, this.currentDir, argTwo)
-      } else if (nameCommand === "decompress" && argOne && argTwo && !argThree) {
-        decompress(argOne, this.currentDir, argTwo)
+      switch (true) {
+        case nameCommand === ".exit" && !argOne:
+          process.exit();
+        case nameCommand === "up" && !argOne:
+          this.currentDir = up(this.currentDir, this.rootDit);
+          break;
+        case nameCommand === "cd" && argOne && !argTwo:
+          if (cd(argOne, this.currentDir) !== undefined) {
+            this.currentDir = cd(argOne, this.currentDir);
+          }
+          break;
+        case nameCommand === "ls" && !argOne:
+          ls(this.currentDir);
+          break;
+        case nameCommand === "cat" && argOne && !argTwo:
+          cat(argOne, this.currentDir);
+          break;
+        case nameCommand === "add" && argOne && !argTwo:
+          add(argOne, this.currentDir);
+          break;
+        case nameCommand === "rn" && argOne && argTwo && !argThree:
+          rn(argOne, this.currentDir, argTwo);
+          break;
+        case nameCommand === "cp" && argOne && argTwo && !argThree:
+          cp(argOne, this.currentDir, argTwo);
+          break;
+        case nameCommand === "mv" && argOne && argTwo && !argThree:
+          mv(argOne, this.currentDir, argTwo);
+          break;
+        case nameCommand === "rm" && argOne && !argTwo:
+          rm(argOne, this.currentDir);
+          break;
+        case nameCommand === "os" && argOne === "--EOL" && !argTwo:
+          eol();
+          break;
+        case nameCommand === "os" && argOne === "--cpus" && !argTwo:
+          cpus();
+          break;
+        case nameCommand === "os" && argOne === "--architecture" && !argTwo:
+          arh();
+          break;
+        case nameCommand === "os" && argOne === "--homedir" && !argTwo:
+          homedir();
+          break;
+        case nameCommand === "os" && argOne === "--username" && !argTwo:
+          getName();
+          break;
+        case nameCommand === "hash" && argOne && !argTwo:
+          hash(argOne, this.currentDir);
+          break;
+        case nameCommand === "compress" && argOne && argTwo && !argThree:
+          compress(argOne, this.currentDir, argTwo);
+          break;
+        case nameCommand === "decompress" && argOne && argTwo && !argThree:
+          decompress(argOne, this.currentDir, argTwo);
+          break;
       }
 
       this.showCurrentDirectory();
